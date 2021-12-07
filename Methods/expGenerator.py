@@ -3,11 +3,8 @@ import numpy as np
 
 
 class ExpGenerator:
-    def __init__(self):
-        print("bruh")
 
     def generateExp(self, df, privacy=True):
-        print("i wanted to surprise you guys")
         for col in df:
             ratings = df[col].values.ravel()
             minG = min(ratings)
@@ -37,7 +34,7 @@ class ExpGenerator:
     def calculateNumOfLows(self, ratings):
         count = 0
         for val in ratings:
-            if val < 4.0:
+            if val < 3.5:
                 count += 1
         return count
 
