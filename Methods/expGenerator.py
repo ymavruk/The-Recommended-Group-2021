@@ -5,6 +5,7 @@ import numpy as np
 class ExpGenerator:
 
     def generateExp(self, df, privacy=True):
+        indeces = df.index.values.ravel()
         for col in df:
             ratings = df[col].values.ravel()
             minG = min(ratings)
@@ -17,19 +18,24 @@ class ExpGenerator:
                     print("The majority of the group will like {}, some will love it!".format(col))
                 elif minG > 2 and maxG < 4:
                     print("The majority of the group will like {}.".format(col))
-                elif lowNum >=3 and maxG>=4:
-                    print("{} is not the top choice for majority, but some will love it. Why not give it a try?".format(col))
-                elif lowNum ==1 and maxG>3.8:
-                    print("One person might not like the game, but the majority of the group will love the game: {}.".format(col))
+                elif lowNum >= 3 and maxG >= 4:
+                    print("{} is not the top choice for majority, but some will love it. Why not give it a try?".format(
+                        col))
+                elif lowNum == 1 and maxG > 3.8:
+                    print(
+                        "One person might not like the game, but the majority of the group will love the game: {}.".format(
+                            col))
             else:
                 lowUser = np.where(ratings == minG)
                 highUser = np.where(ratings == maxG)
-
-                # for index, row in df.iterrows():
-                #     if index in lowUser[0]:
-                #         if row[col] == minG and dic[]
-
-                print(highUser)
+                highestUser = df.index.values.ravel()[highUser[0]][0]
+                for i, val in enumerate(ratings):
+                    if val < 3.5:
+                        print(
+                            "Hey {}, you might not like {}, but your friend {} loves it, so maybe give it a try.".format(
+                                indeces[i], col, highestUser))
+                    elif val >= 3.5:
+                        print("Hey {}, you will love {}".format(indeces[i], col))
 
     def calculateNumOfLows(self, ratings):
         count = 0
@@ -49,4 +55,4 @@ class ExpGenerator:
 if __name__ == "__main__":
     exp = ExpGenerator()
     testdf = exp.test()
-    exp.generateExp(testdf, privacy=True)
+    exp.generateExp(testdf, privacy=False)
