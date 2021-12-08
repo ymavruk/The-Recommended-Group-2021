@@ -29,18 +29,19 @@ class ExpGenerator:
                 lowUser = np.where(ratings == minG)
                 highUser = np.where(ratings == maxG)
                 highestUser = df.index.values.ravel()[highUser[0]][0]
+                start ="The {} game is recommended ".format(col)
                 for i, val in enumerate(ratings):
-                    if val < 3.5:
+                    if val < 3:
                         print(
                             "Hey {}, you might not like {}, but your friend {} loves it, so maybe give it a try.".format(
                                 indeces[i], col, highestUser))
-                    elif val >= 3.5:
+                    if val >= 3:
                         print("Hey {}, you will love {}".format(indeces[i], col))
 
     def calculateNumOfLows(self, ratings):
         count = 0
         for val in ratings:
-            if val < 3.5:
+            if val < 3.75:
                 count += 1
         return count
 
@@ -55,4 +56,4 @@ class ExpGenerator:
 if __name__ == "__main__":
     exp = ExpGenerator()
     testdf = exp.test()
-    exp.generateExp(testdf, privacy=False)
+    exp.generateExp(testdf, privacy=True)
