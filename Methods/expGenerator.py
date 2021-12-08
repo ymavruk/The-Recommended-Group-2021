@@ -31,12 +31,38 @@ class ExpGenerator:
                 highestUser = df.index.values.ravel()[highUser[0]][0]
                 start ="The {} game is recommended ".format(col)
                 for i, val in enumerate(ratings):
+                    # print(col)
+                    # print(val)
+
                     if val < 3:
-                        print(
-                            "Hey {}, you might not like {}, but your friend {} loves it, so maybe give it a try.".format(
-                                indeces[i], col, highestUser))
+                        lowRatedUsers.append(indeces[i])
+
+                        # print(
+                        #     "Hey {}, you might not like {}, but your friend {} loves it, so maybe give it a try.".format(
+                        #         indeces[i], col, highestUser))
                     if val >= 3:
-                        print("Hey {}, you will love {}".format(indeces[i], col))
+                        highRatedUsers.append(indeces[i])
+                        # print("Hey {}, you will love {}".format(indeces[i], col))
+
+                # highRStr = str(highRatedUsers).replace("[", "").replace("]", "")
+                # lowRStr = str(lowRatedUsers).replace("[", "").replace("]", "")
+                # if len(lowRatedUsers) == 0:
+                #     print("{} is great because you all, ".format(col) + highRStr + ", will like game.")
+                # elif len(highRatedUsers) == 0:
+                #     print("{} is not a right choice because you all, ".format(col) +
+                #           lowRStr + ", will not like the game.")
+                # elif len(lowRatedUsers) > len(highRatedUsers):
+                #     print("{} is not a right choice because the group members: ".format(col) +
+                #           lowRStr + " will not like the game, but the group members: " +
+                #           highRStr + " will like the game.")
+                # elif len(lowRatedUsers) < len(highRatedUsers):
+                #     print("{} is a good choice because the group members: ".format(col) +
+                #           highRStr + " will like the game, but the group members: " +
+                #           lowRStr + " will not like the game.")
+
+                print("{} is recommended because it has a group score of {} due to the highest rating determined for "
+                      "user with id {}. Also, it avoids misery within the group with a threshold of {} determined for "
+                      "user with id {}.".format(col, round(maxG, 2), highestUser, round(minG, 2), lowestUser))
 
     def calculateNumOfLows(self, ratings):
         count = 0
