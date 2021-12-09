@@ -1,7 +1,7 @@
 # The Recommended Group 2021
 This is the group project of the Recommender Systems course of Maastricht University.
 
-lenskit and gensim packages are required to be able to run every code.
+lenskit and gensim packages are required to be able to run all the jupyter notebooks.
 
 The dataset used with the models: https://drive.google.com/file/d/1SVCdY2bt_6I5dfsYRCqRNnvW6xCRFTHW/view?usp=sharing
 
